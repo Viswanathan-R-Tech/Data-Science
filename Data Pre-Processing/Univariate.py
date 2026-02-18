@@ -16,7 +16,7 @@ class Univariate():
     # Generate univariate statistics
     def univariateTable(dataset, quan):
             descriptive = pd.DataFrame(index=["Mean", "Median", "Mode", "Q1:25%", "Q2:50%", "Q3:75%", "99%", "Q4:100%", "IQR", "1.5 rule", "Lesser", 
-                                          "Greater", "Min", "Max"], columns=quan)
+                                          "Greater", "Min", "Max", "Var", "STD"], columns=quan)
             for columnName in quan:
                 descriptive.loc["Mean", columnName] = dataset[columnName].mean()
                 descriptive.loc["Median", columnName] = dataset[columnName].median()
@@ -32,6 +32,8 @@ class Univariate():
                 descriptive.loc["Greater", columnName] = descriptive.loc["Q3:75%", columnName] + descriptive.loc["1.5 rule", columnName]
                 descriptive.loc["Min", columnName] = dataset[columnName].min()
                 descriptive.loc["Max", columnName] = dataset[columnName].max()
+                descriptive.loc["Var", columnName] = dataset[columnName].var()
+                descriptive.loc["STD", columnName] = dataset[columnName].std()
             return descriptive
 
     #checkOutlier
